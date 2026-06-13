@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Secret Number</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .game-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 120px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-box">
+        <h2>Guess the Secret Number (1-10)</h2>
+        
+        <input type="number" id="guessInput" min="1" max="10">
+        <button onclick="checkGuess()">Guess</button>
+        
+        <p id="result"></p>
+    </div>
+
+    <script>
+        var secretNumber = Math.floor(Math.random() * 10) + 1;
+        
+        function checkGuess() {
+            var guess = parseInt(document.getElementById("guessInput").value);
+            var result = document.getElementById("result");
+            
+            if (guess < 1 || guess > 10) {
+                result.innerHTML = "Enter 1-10 only!";
+                result.style.color = "orange";
+                return;
+            }
+            
+            if (guess == secretNumber) {
+                result.innerHTML = "Correct! You guessed the secret number!";
+                result.style.color = "green";
+                secretNumber = Math.floor(Math.random() * 10) + 1;
+            }
+            else if (guess >= 1 && guess <= 5) {
+                result.innerHTML = "Too Low!";
+                result.style.color = "#1976d2";
+            } else if (guess >= 6 && guess <= 10) {
+                result.innerHTML = "Too High!";
+                result.style.color = "#d32f2f";
+            }
+        }
+    </script>
+</body>
+</html>
